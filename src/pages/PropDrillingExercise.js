@@ -29,12 +29,12 @@ const RootComponent = (props) => {
   // Example newProduct = { id: "p1", title: "Product 1", price: 1999 }
   // The function will add one new product into the cart
   const addProductToCart = (addedProduct) => {
-    let newCartTotalPrice = 0;
+    let newCartTotalPrice = cart.totalPrice;
     const newCartProductList = cart.products.map((cartProduct) => {
       if (cartProduct.id === addedProduct.id) {
         cartProduct.qty++;
         cartProduct.price += addedProduct.price;
-        newCartTotalPrice = cart.totalPrice + addedProduct.price;
+        newCartTotalPrice += addedProduct.price;
       }
       return cartProduct;
     });
@@ -51,12 +51,12 @@ const RootComponent = (props) => {
   // The function will remove one product from the cart. The min value of quantity is 0
 
   const removeProductFromCart = (removedProduct) => {
-    let newCartTotalPrice = 0;
+    let newCartTotalPrice = cart.totalPrice;
     const newCartProductList = cart.products.map((cartProduct) => {
       if (cartProduct.id === removedProduct.id && cartProduct.qty > 0) {
         cartProduct.qty--;
         cartProduct.price -= removedProduct.price;
-        newCartTotalPrice = cart.totalPrice - removedProduct.price;
+        newCartTotalPrice -= removedProduct.price;
       }
       return cartProduct;
     });
